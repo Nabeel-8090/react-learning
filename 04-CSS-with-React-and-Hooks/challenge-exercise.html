@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Challenge Exercises</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            background-color: #f5f7fa;
+        }
+
+        .js-container {
+            width: 380px;
+            padding: 35px;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .js-container > p {
+            margin: 0 0 25px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            color: #222;
+        }
+
+        .input-box {
+            position: relative;
+            padding: 8px 0;
+        }
+
+        input {
+            width: 100%;
+            padding: 13px 14px;
+            border: 1px solid #d1d5db;
+            border-radius: 7px;
+            font-size: 15px;
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        input:focus {
+            border-color: rgb(0, 123, 255);
+            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.12);
+        }
+
+        /* Main buttons */
+        .main-button {
+            padding: 12px 20px;
+            margin-top: 18px;
+            margin-right: 8px;
+            border: none;
+            border-radius: 7px;
+            background-color: rgb(0, 123, 255);
+            color: white;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s, transform 0.1s;
+        }
+
+        .main-button:hover {
+            background-color: rgb(0, 105, 220);
+        }
+
+        .main-button:active {
+            transform: scale(0.97);
+        }
+
+        /* Show / Hide button */
+        .password-button {
+            position: absolute;
+            right: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+
+            margin: 0;
+            padding: 6px 9px;
+
+            border: none;
+            background: transparent;
+            color: rgb(0, 123, 255);
+
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .password-button:hover {
+            background: transparent;
+            color: rgb(0, 105, 220);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="js-container"></div>
+
+    <script src="https://unpkg.com/supersimpledev/react.js"></script>
+    <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+
+    <script src="https://unpkg.com/supersimpledev/chatbot.js"></script>
+
+    <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+
+    <script type="text/babel">
+
+        function LoginForm() {
+            const [showPassword, setShowPassword] = React.useState(false);
+
+            function changePasswordVisibility() {
+                setShowPassword(!showPassword);
+            }
+
+            return (
+                <>
+                    <div className="input-box">
+                        <input
+                            type="email"
+                            placeholder="Email"
+                        />
+                    </div>
+
+                    <div className="input-box">
+                        <input
+                            type={showPassword ? 'text' : 'password'}
+                            placeholder="Password"
+                        />
+
+                        <button
+                            className="password-button"
+                            onClick={changePasswordVisibility}
+                        >
+                            {showPassword ? 'Hide' : 'Show'}
+                        </button>
+                    </div>
+
+                    <button className="main-button">
+                        Login
+                    </button>
+
+                    <button className="main-button">
+                        Sign up
+                    </button>
+                </>
+            );
+        }
+
+        function App() {
+            return (
+                <>
+                    <p>Hello, welcome to my website</p>
+                    <LoginForm />
+                </>
+            );
+        }
+
+        const container = document.querySelector('.js-container');
+        ReactDOM.createRoot(container).render(<App />);
+
+    </script>
+</body>
+</html>
