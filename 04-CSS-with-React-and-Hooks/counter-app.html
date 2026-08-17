@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Counter App</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+        }
+
+        .js-container {
+            display: flex;
+            gap: 10px;
+        }
+
+        button {
+            padding: 10px 16px;
+            border: none;
+            border-radius: 5px;
+            background-color: rgb(25, 135, 84);
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="js-container"></div>
+
+    <script src="https://unpkg.com/supersimpledev/react.js"></script>
+    <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+
+    <script src="https://unpkg.com/supersimpledev/chatbot.js"></script>
+
+    <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+
+    <script type="text/babel">
+
+        function Count() {
+            const [ count, setCount ] = React.useState(0);
+
+            const buttonRef = React.useRef(null);
+            const intervalRef = React.useRef(null);
+
+            function increaseCount() {
+                setCount(count => count + 1);
+            }
+
+            function reset() {
+                setCount(0);
+
+                clearInterval(intervalRef.current);
+                intervalRef.current = null;
+            }
+
+            function autoClick() {
+                if (intervalRef.current) {
+                    return;
+                }
+                intervalRef.current = setInterval(() => {
+                    buttonRef.current.click();
+                }, 1000);
+            }
+
+            return (
+                <>
+                    <button
+                        ref={buttonRef}
+                        onClick={increaseCount}                        
+                    >Clicked {count} {count === 1 ? 'time' : 'times'}</button>
+                    <button
+                        onClick={reset}
+                    >Reset</button>
+                    <button
+                        onClick={autoClick}
+                    >Auto Click</button>
+                </>
+            );
+        }
+
+        function App() {
+            return (
+                <>
+                    <Count />
+                </>
+            );
+        }
+
+        const container = document.querySelector('.js-container');
+        ReactDOM.createRoot(container).render(<App />);
+
+    </script>
+</body>
+</html>
