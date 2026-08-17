@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practice Code</title>
+</head>
+<body>
+    <div class="js-container"></div>
+
+    <script src="https://unpkg.com/supersimpledev/react.js"></script>
+    <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+
+    <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+
+    <script type="text/babel">
+        function Count({ count, increaseCount }) {
+            return (
+                <>
+                    {count === 1 ? (
+                        <button onClick={increaseCount}>Clicked {count} time</button>) 
+                        : (<button onClick={increaseCount}>Clicked {count} times</button>
+                    )}
+                </>
+            );
+        }
+
+        function Reset({ setCount }) {
+            function reset() {
+                setCount(0);
+            }
+            return (
+                <>
+                    <button
+                        onClick={reset}
+                    >Reset</button>
+                </>
+            );
+        }
+
+        function App() {
+            const [ count, setCount ] = React.useState(0);
+            function increaseCount() {
+                setCount(count + 1);
+            }
+
+            return (
+                <>
+                    <Count
+                        count={count}
+                        increaseCount={increaseCount}
+                    />
+                    <Count
+                        count={count}
+                        increaseCount={increaseCount}
+                    />
+                    <Reset
+                        setCount={setCount}
+                    />
+                </>
+            );
+        }
+
+        const container = document.querySelector('.js-container');
+        ReactDOM.createRoot(container).render(<App />);
+    </script>
+</body>
+</html>
