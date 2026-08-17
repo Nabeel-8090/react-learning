@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clock</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+        }
+
+        .js-container {
+            text-align: center;
+            margin-top: 100px;
+        }
+
+        p {
+            display: inline-block;
+            padding: 20px 30px;
+            background-color: #222;
+            color: white;
+            border-radius: 8px;
+            font-size: 30px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="js-container"></div>
+
+    <script src="https://unpkg.com/supersimpledev/dayjs.js"></script>
+
+    <script src="https://unpkg.com/supersimpledev/react.js"></script>
+    <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+
+    <script src="https://unpkg.com/supersimpledev/chatbot.js"></script>
+
+    <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+
+    <script type="text/babel">
+
+        function Clock() {
+            const [ time, setTime ] = React.useState(dayjs().format('hh:mm:ss A'));
+
+            React.useEffect(() => {
+                console.log('EFFECT RUN');
+                const intervalId = setInterval(() => {
+                    setTime(dayjs().format('hh:mm:ss A'));
+                    console.log('run code');
+                }, 1000);
+
+                return () => {
+                    console.log('CLEANUP');
+                    clearInterval(intervalId);
+                };
+            }, []);
+
+            return (
+                <>
+                    <p>Current time: {time}</p>
+                </>
+            );
+        }
+
+        function App() {
+            return (
+                <>
+                    <Clock />
+                </>
+            );
+        }
+
+        const container = document.querySelector('.js-container');
+        ReactDOM.createRoot(container).render(<App />);
+
+    </script>
+</body>
+</html>
