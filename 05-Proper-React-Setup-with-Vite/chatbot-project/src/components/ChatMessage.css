@@ -24,3 +24,8 @@
     border-radius: 45px;
     object-fit: cover;
 }
+
+.message-time {
+    font-size: 11px;
+    color: #888;
+}
