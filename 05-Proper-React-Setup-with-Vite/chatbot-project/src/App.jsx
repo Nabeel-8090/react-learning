@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { Chatbot } from 'supersimpledev';
 import ChatInput from './components/ChatInput';
 import ChatMessages from './components/ChatMessages';
 import './App.css';
@@ -6,6 +7,16 @@ import './App.css';
 function App() {
   const [chatMessages, setChatMessages] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    Chatbot.addResponses(
+      {
+        'hello': 'Hello! How can I help you?',
+        'how are you': 'I am doing great!',
+        'what is your name': 'I am your chatbot.'
+      }
+    );
+  }, []);
 
   return (
     <div className="app-container">
