@@ -47,6 +47,10 @@ function ChatInput({ chatMessages, setChatMessages, isLoading, setIsLoading }) {
         }
     }
 
+    function clearChat() {
+        setChatMessages([]);
+    }
+
     return (
         <div className="chat-input-container">
             <input
@@ -61,6 +65,11 @@ function ChatInput({ chatMessages, setChatMessages, isLoading, setIsLoading }) {
                 onClick={sendMessage}
                 className="send-button"
             >Send</button>
+            <button
+                onClick={clearChat}
+                className="clear-chat-button"
+            >                
+            Clear Chat</button>
         </div>
     );
 }

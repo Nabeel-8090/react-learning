@@ -5,8 +5,14 @@ import ChatMessages from './components/ChatMessages';
 import './App.css';
 
 function App() {
-  const [chatMessages, setChatMessages] = useState([]);
+  const [chatMessages, setChatMessages] = useState(
+    JSON.parse(localStorage.getItem('messages')) || []
+  );
   const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    localStorage.setItem('messages', JSON.stringify(chatMessages));
+  }, [chatMessages]);
 
   useEffect(() => {
     Chatbot.addResponses(
