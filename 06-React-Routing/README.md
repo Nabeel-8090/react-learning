@@ -68,6 +68,34 @@ When using react-router, use `<Link>` instead of `<a>`.
 
 `<Link>` → go to another page without reloading.
 
+## Navigation with `<NavLink>`
+
+`<NavLink>` works just like `<Link>`, but with one special feature: it **knows which page it's on**.
+
+- If the `<NavLink>` points to the current page, React Router automatically adds an `active` class to it.
+- This makes it easy to highlight the currently active link (e.g. in a navigation menu).
+
+### Styling the Active Link
+
+We can target the active state directly in CSS:
+
+```css
+.className.active {
+}
+```
+
+```jsx
+<NavLink to="/" className="nav-link">Home</NavLink>
+<NavLink to="/checkout" className="nav-link">Checkout</NavLink>
+```
+
+```css
+.nav-link.active {
+    color: green;
+    font-weight: bold;
+}
+```
+
 ## Summary
 
 In this lesson:
