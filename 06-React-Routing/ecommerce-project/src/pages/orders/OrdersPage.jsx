@@ -5,7 +5,7 @@ import OrdersGrid from './OrdersGrid';
 import CheckmarkWhite from '../../assets/images/icons/checkmark-white.png';
 import './OrdersPage.css';
 
-function OrdersPage({ cart }) {
+function OrdersPage({ cart, loadCart }) {
     const [orders, setOrders] = useState([]);
 
     useEffect(() => {
@@ -28,6 +28,7 @@ function OrdersPage({ cart }) {
 
                 <OrdersGrid
                     orders={orders}
+                    loadCart={loadCart}
                 />
             </div>
         </>

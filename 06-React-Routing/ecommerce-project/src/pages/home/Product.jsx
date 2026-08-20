@@ -5,6 +5,7 @@ import { useState } from 'react';
 
 function Product({ loadCart, product }) {
     const [quantity, setQuantity] = useState(1);
+    const [isAdded, setIsAdded] = useState(false);
 
     const selectQuantity = (event) => {
         const quantitySelected = Number(event.target.value);
@@ -17,6 +18,11 @@ function Product({ loadCart, product }) {
             quantity
         });
         await loadCart();
+
+        setIsAdded(true);
+        setTimeout(() => {
+            setIsAdded(false);
+        }, 2000);
     }
 
     return (
@@ -57,7 +63,10 @@ function Product({ loadCart, product }) {
 
             <div className="product-spacer"></div>
 
-            <div className="added-to-cart">
+            <div
+                className="added-to-cart"
+                style={{ opacity: isAdded ? 1 : 0 }}
+            >
                 <img src={Checkmark} />
                 Added
             </div>

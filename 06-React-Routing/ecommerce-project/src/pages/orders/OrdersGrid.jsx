@@ -1,10 +1,11 @@
 import BuyAgain from '../../assets/images/icons/buy-again.png';
+import axios from 'axios';
 import { formatMoney } from '../../utils/money';
 import { Fragment } from 'react';
 import { Link } from 'react-router';
 import dayjs from 'dayjs';
 
-function OrdersGrid({ orders }) {
+function OrdersGrid({ orders, loadCart }) {
     return (
         <div className="orders-grid">
             {orders.map((order) => {
@@ -31,6 +32,13 @@ function OrdersGrid({ orders }) {
 
                         <div className="order-details-grid">
                             {order.products.map((product) => {
+                                const increaseQuantity = async () => {
+                                    await axios.post('/api/cart-items', {
+                                        productId: product.product.id,
+                                        quantity: 1
+                                    });
+                                    await loadCart();
+                                }
                                 return (
                                     <Fragment key={product.product.id}>
                                         <div className="product-image-container">
@@ -49,7 +57,10 @@ function OrdersGrid({ orders }) {
                                             </div>
                                             <button className="buy-again-button button-primary">
                                                 <img className="buy-again-icon" src={BuyAgain} />
-                                                <span className="buy-again-message">Add to Cart</span>
+                                                <span
+                                                    className="buy-again-message"
+                                                    onClick={increaseQuantity}
+                                                >Add to Cart</span>
                                             </button>
                                         </div>
 
