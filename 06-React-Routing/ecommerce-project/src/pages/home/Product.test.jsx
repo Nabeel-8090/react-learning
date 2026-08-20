@@ -24,14 +24,14 @@ describe('Product component', () => {
         }
 
         loadCart = vi.fn();
-    });
 
-    it('displays the product details correctly', () => {
         render(<Product
             product={product}
             loadCart={loadCart}
         />);
+    });
 
+    it('displays the product details correctly', () => {
         expect(
             screen.getByText('Black and Gray Athletic Cotton Socks - 6 Pairs')
         ).toBeInTheDocument();
@@ -54,11 +54,6 @@ describe('Product component', () => {
     });
 
     it('adds a product to the cart', async () => {
-        render(<Product
-            product={product}
-            loadCart={loadCart}
-        />);
-
         const user = userEvent.setup();
         const addToCartButton = screen.getByTestId('add-to-cart-button');
         await user.click(addToCartButton);
@@ -71,5 +66,10 @@ describe('Product component', () => {
             }
         );
         expect(loadCart).toHaveBeenCalled();
+    });
+
+    it('test if it can select a quantity', async () => {
+        const quantitySelector = screen.getByTestId('quantity-selector');
+        expect(quantitySelector).toHaveValue('1');
     });
 });
