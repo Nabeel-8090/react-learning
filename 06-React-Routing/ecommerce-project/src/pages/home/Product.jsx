@@ -12,13 +12,11 @@ function Product({ loadCart, product }) {
     }
 
     const addToCart = async () => {
-        async () => {
-            await axios.post('/api/cart-items', {
-                productId: product.id,
-                quantity
-            });
-            await loadCart();
-        }
+        await axios.post('/api/cart-items', {
+            productId: product.id,
+            quantity
+        });
+        await loadCart();
     }
 
     return (
