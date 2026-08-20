@@ -11,7 +11,7 @@ function ProductsGrid({ products, loadCart }) {
                         product={product}
                     />
                 );
-            })};
+            })}
         </div>
     );
 }
