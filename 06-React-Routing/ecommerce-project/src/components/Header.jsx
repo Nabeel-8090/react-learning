@@ -19,7 +19,10 @@ function Header({ cart }) {
     });
 
     function handleSearch() {
-        navigate(`/?search=${searchInput}`);
+        if (searchInput) {
+            navigate(`/?search=${searchInput}`);
+        }
+        setSearchInput('');
     }
 
     return (
