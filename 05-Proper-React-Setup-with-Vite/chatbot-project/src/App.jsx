@@ -9,9 +9,11 @@ function App() {
     JSON.parse(localStorage.getItem('messages')) || []
   );
   const [isLoading, setIsLoading] = useState(false);
+  const [title, setTitle] = useState('Chatbot');
 
   useEffect(() => {
     localStorage.setItem('messages', JSON.stringify(chatMessages));
+    setTitle(chatMessages.length);
   }, [chatMessages]);
 
   useEffect(() => {
@@ -23,6 +25,10 @@ function App() {
       }
     );
   }, []);
+
+  useEffect(() => {
+    document.title = title === 0 ? 'Chatbot' : `${title} ${title === 1 ? 'Message' : 'Messages'}`;
+  }, [title]);
 
   return (
     <div className="app-container">
