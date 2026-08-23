@@ -1,0 +1,11 @@
+.chat-messages-container {
+    flex-grow: 1;
+    margin-top: 20px;
+    padding-bottom: 150px;
+    overflow: scroll;
+    scrollbar-width: none;
+}
+
+.loading-gif {
+    width: 45px;
+}
