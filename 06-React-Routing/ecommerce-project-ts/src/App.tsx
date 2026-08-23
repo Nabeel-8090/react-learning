@@ -10,7 +10,6 @@ function App() {
   console.log(message);
 
   message.toLowerCase();
-  message.toFixed();
 
   return (
     <>
