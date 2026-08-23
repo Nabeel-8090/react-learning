@@ -6,7 +6,15 @@ import SearchIcon from '../assets/images/icons/search-icon.png';
 import CartIcon from '../assets/images/icons/cart-icon.png';
 import './Header.css';
 
-function Header({ cart }) {
+type HeaderProps = {
+    cart: {
+        productId: string,
+        quantity: number,
+        deliveryOptionId: string
+    }[];
+}
+
+function Header({ cart }: HeaderProps) {
     const [searchParams] = useSearchParams();
     const searchQuery = searchParams.get('search');
 
@@ -44,7 +52,11 @@ function Header({ cart }) {
                         onChange={(event) => {
                             setSearchInput(event.target.value);
                         }}
-                        onKeyDown={(event) => {event.key === 'Enter' && handleSearch()}}
+                        onKeyDown={(event) => {
+                            if (event.key === 'Enter') {
+                                handleSearch();
+                            }
+                        }}
                     />
                     <button
                         className="search-button"
